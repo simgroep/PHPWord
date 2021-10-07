@@ -10,19 +10,21 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/PHPWord/contributors.
  *
- * @link        https://github.com/PHPOffice/PHPWord
- * @copyright   2010-2016 PHPWord contributors
+ * @see         https://github.com/PHPOffice/PHPWord
+ * @copyright   2010-2018 PHPWord contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 
 namespace PhpOffice\PhpWord\Element;
+
+use PhpOffice\PhpWord\AbstractWebServerEmbeddedTest;
 
 /**
  * Test class for PhpOffice\PhpWord\Element\Header
  *
  * @runTestsInSeparateProcesses
  */
-class HeaderTest extends \PHPUnit_Framework_TestCase
+class HeaderTest extends AbstractWebServerEmbeddedTest
 {
     /**
      * New instance
@@ -125,7 +127,7 @@ class HeaderTest extends \PHPUnit_Framework_TestCase
     public function testAddImageByUrl()
     {
         $oHeader = new Header(1);
-        $element = $oHeader->addImage('http://php.net/images/logos/php-med-trans-light.gif');
+        $element = $oHeader->addImage(self::getRemoteGifImageUrl());
 
         $this->assertCount(1, $oHeader->getElements());
         $this->assertInstanceOf('PhpOffice\\PhpWord\\Element\\Image', $element);
@@ -228,7 +230,7 @@ class HeaderTest extends \PHPUnit_Framework_TestCase
     /**
      * Add footnote exception
      *
-     * @expectedException BadMethodCallException
+     * @expectedException \BadMethodCallException
      */
     public function testAddFootnoteException()
     {

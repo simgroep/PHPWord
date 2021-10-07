@@ -10,8 +10,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/PHPWord/contributors.
  *
- * @link        https://github.com/PHPOffice/PHPWord
- * @copyright   2010-2016 PHPWord contributors
+ * @see         https://github.com/PHPOffice/PHPWord
+ * @copyright   2010-2018 PHPWord contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 
@@ -25,7 +25,7 @@ use PhpOffice\PhpWord\SimpleType\Jc;
  * @coversDefaultClass \PhpOffice\PhpWord\Style
  * @runTestsInSeparateProcesses
  */
-class StyleTest extends \PHPUnit_Framework_TestCase
+class StyleTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Add and get paragraph, font, link, title, and table styles
@@ -33,6 +33,7 @@ class StyleTest extends \PHPUnit_Framework_TestCase
      * @covers ::addParagraphStyle
      * @covers ::addFontStyle
      * @covers ::addLinkStyle
+     * @covers ::addNumberingStyle
      * @covers ::addTitleStyle
      * @covers ::addTableStyle
      * @covers ::setDefaultParagraphStyle
@@ -47,6 +48,20 @@ class StyleTest extends \PHPUnit_Framework_TestCase
         $paragraph = array('alignment' => Jc::CENTER);
         $font = array('italic' => true, '_bold' => true);
         $table = array('bgColor' => 'CCCCCC');
+        $numbering = array(
+            'type'   => 'multilevel',
+            'levels' => array(
+                array(
+                    'start'     => 1,
+                    'format'    => 'decimal',
+                    'restart'   => 1,
+                    'suffix'    => 'space',
+                    'text'      => '%1.',
+                    'alignment' => Jc::START,
+                ),
+            ),
+        );
+
         $styles = array(
             'Paragraph' => 'Paragraph',
             'Font'      => 'Font',
@@ -54,12 +69,13 @@ class StyleTest extends \PHPUnit_Framework_TestCase
             'Table'     => 'Table',
             'Heading_1' => 'Font',
             'Normal'    => 'Paragraph',
+            'Numbering' => 'Numbering',
         );
 
         Style::addParagraphStyle('Paragraph', $paragraph);
         Style::addFontStyle('Font', $font);
         Style::addLinkStyle('Link', $font);
-        // @todo Style::addNumberingStyle
+        Style::addNumberingStyle('Numbering', $numbering);
         Style::addTitleStyle(1, $font);
         Style::addTableStyle('Table', $table);
         Style::setDefaultParagraphStyle($paragraph);

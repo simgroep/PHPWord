@@ -10,8 +10,8 @@
  * file that was distributed with this source code. For the full list of
  * contributors, visit https://github.com/PHPOffice/PHPWord/contributors.
  *
- * @link        https://github.com/PHPOffice/PHPWord
- * @copyright   2010-2016 PHPWord contributors
+ * @see         https://github.com/PHPOffice/PHPWord
+ * @copyright   2010-2018 PHPWord contributors
  * @license     http://www.gnu.org/licenses/lgpl.txt LGPL version 3
  */
 
@@ -23,7 +23,7 @@ namespace PhpOffice\PhpWord\Element;
  * @coversDefaultClass \PhpOffice\PhpWord\Element\Table
  * @runTestsInSeparateProcesses
  */
-class TableTest extends \PHPUnit_Framework_TestCase
+class TableTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Create new instance
@@ -99,10 +99,10 @@ class TableTest extends \PHPUnit_Framework_TestCase
     {
         $oTable = new Table();
         $oTable->addRow();
-        $element = $oTable->addCell();
+        $oTable->addCell();
         $this->assertEquals($oTable->countColumns(), 1);
-        $element = $oTable->addCell();
-        $element = $oTable->addCell();
+        $oTable->addCell();
+        $oTable->addCell();
         $this->assertEquals($oTable->countColumns(), 3);
     }
 }
